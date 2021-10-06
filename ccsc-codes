@@ -1,0 +1,36 @@
+#include <main1.h>
+#include <16f877A.h>
+#fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NOCPD
+#use delay (clock=4Mhz)
+void main()
+{
+set_tris_b(0b000000011); //b0 ve b1 input, b7 output olarak tanımlandı b7 dahil kalan tüm portlar hatta
+#define BUTON1 pin_b0
+#define BUTON2 pin_b1
+#define LED pin_b7
+#define LED1 pin_b6
+#define LED2 pin_b5
+#define LED3 pin_b4 //0000 1000 
+#define LED4 pin_b2 //output_b(0b00000110) 2. ve 3.bitler için = output_b(6) decimalde, output_b(0x06)hexada
+output_b(0x00); //initialize saklı 1 leri yok etmek adına
+while(1){
+if (input(BUTON1) ==1){
+output_high(LED); //output_b(1) de yazolabilirdi hiç LEDleri tanımlamasaydım, ama bit değerlerini yazmamız gerekiyor 2^1 gibi
+delay_ms(500);
+output_high(LED1);
+delay_ms(500);
+output_high(LED2);
+delay_ms(500);
+output_high(LED3);
+delay_ms(500);
+if (input(BUTON2)== 1){
+output_high(LED3);
+delay_ms(500);
+output_high(LED2);
+delay_ms(500);
+output_high(LED1);
+delay_ms(500);
+output_high(LED);
+delay_ms(500);
+
+}}}}
